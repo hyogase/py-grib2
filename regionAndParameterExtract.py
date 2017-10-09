@@ -3,12 +3,18 @@ import traceback
 import sys
 import time
 import os
- 
+import ftpconfig 
 from gribapi import *
  
-INPUT = sys.argv[1]
-rootPath = sys.argv[2]
-OUTPUT = rootPath + "/" + sys.argv[3] + ".grib2"
+#INPUT = sys.argv[1]
+#rootPath = sys.argv[2]
+#OUTPUT = rootPath + "/" + sys.argv[3] + ".grib2"
+if len(sys.argv)<2:
+    iniPath=".ini"
+else:
+    iniPath=sys.argv[1]
+fc=ftpconfig.FtpConfig()
+fc.setFromIni(iniparasPath)
 VERBOSE = 1 # verbose error reporting
  
 lon_start = 90
