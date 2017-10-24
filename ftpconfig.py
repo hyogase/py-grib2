@@ -4,7 +4,8 @@ class FtpConfig():
         # HostName=10.201.171.13
         self.SendFiles=''
         # UserName=stky
-        self.OutputFile=''
+        self.OutputPath=''
+        self.OutputFileName=''
         # Password=stky99
         self.shortname=''
 #        # LocalOutBox1=d:\qqctn2017\out\
@@ -42,7 +43,8 @@ class FtpConfig():
         # # SendFiles1=*.*
         self.SendFiles = conf.get("Begin", "SendFiles")
         # LocalInBox1=d:\qqctn2017\in\
-        self.OutputFile = conf.get("Begin", "OutputFile")
+        self.OutputPath = conf.get("Begin", "OutputPath")
+        self.OutputFileName = conf.get("Begin", "OutputFileName")
         # RemoteOutBox1=/depot_modify_qqctn/aa/
         self.shortname = conf.get("Begin", "shortname")
         # ReceiveFiles1=*.*

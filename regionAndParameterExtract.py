@@ -10,18 +10,21 @@ from gribapi import *
 #rootPath = sys.argv[2]
 #OUTPUT = rootPath + "/" + sys.argv[3] + ".grib2"
 if len(sys.argv)<2:
-    iniPath=".ini"
+    iniPath="paras.ini"
 else:
     iniPath=sys.argv[1]
 fc=ftpconfig.FtpConfig()
-fc.setFromIni(iniparasPath)
+fc.setFromIni(iniPath)
 VERBOSE = 1 # verbose error reporting
  
 lon_start = 90
 lat_start = 60
 lon_end = 150
 lat_end = 10
-short_name = sys.argv[4]
+INPUT = fc.SendFiles
+rootPath = fc.OutputPath
+OUTPUT = rootPath + "/" + fc.OutputFileName + ".grib2"
+short_name = fc.shortname
  
 def regionExtract():
     if not os.path.exists(rootPath):
@@ -29,6 +32,8 @@ def regionExtract():
 		
     fin = open(INPUT)
     fout = open(OUTPUT,'w')
+    
+    fo = open(rootPath + "/test.txt", "w")
 	
     while 1: 
         gid = grib_new_from_file(fin)
@@ -37,7 +42,10 @@ def regionExtract():
             break
         
         shortName = grib_get(gid,'shortName')
+ #       print(shortName)
         shrtName = short_name.lower()		
+        fo.writelines(shortName+"\n")
+        
 		
         if shortName != shrtName:
             continue
@@ -95,6 +103,7 @@ def regionExtract():
  
     fin.close()
     fout.close()
+    fo.close()
  
 def main():
     try:
@@ -108,8 +117,8 @@ def main():
             traceback.print_exc(file=sys.stderr)
         else:
             print >>sys.stderr,err.msg
- 
-        return 1
+            exit
+ #       return 1
  
 if __name__ == "__main__":
     sys.exit(main())
