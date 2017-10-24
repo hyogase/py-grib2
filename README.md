@@ -10,5 +10,9 @@ git remote add origin https://github.com/hyogase/py-grib2.git
 git push -u origin master
 
 
-git add .
-git submit
+
+  git status
+  git add -A
+  git commit -m "new 20171024"
+  git push -u origin master:master
+
